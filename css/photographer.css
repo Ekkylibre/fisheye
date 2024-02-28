@@ -79,32 +79,3 @@ form input {
     border: none;
     border-radius: 5px;
 }
-
-.from {
-    color: #901C1C;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.price {
-    color:#757575;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.location {
-    display: flex;
-    gap: 5px;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.tagline {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-h2 {
-    margin-top: 0;
-    margin-bottom: 0;
-}
