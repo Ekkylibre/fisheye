@@ -1,4 +1,3 @@
-//Mettre le code JavaScript lié à la page photographer.html
 import { photographerTemplate } from "../templates/photographer.js";
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -27,6 +26,7 @@ async function displayDataPhotographer(photographer) {
     const photographerDom = photographerModel.getUserCardDOM();
     
     const img = photographerDom.querySelector('img');
+    img.classList.add("photographer-img")
     const h2 = photographerDom.querySelector('h2');
     const locationWrapper = photographerDom.querySelector('.location');
     const Tagline = photographerDom.querySelector('.tagline');
@@ -43,9 +43,6 @@ async function displayDataPhotographer(photographer) {
     // Ajouter les éléments sélectionnés au DOM
     photographHeader.appendChild(img); // Ajoute l'image directement à photographHeader
     photographHeader.appendChild(detailsWrapper);
-    
-    locationWrapper.appendChild(city);
-    locationWrapper.appendChild(country);
 }
 
 async function init() {
