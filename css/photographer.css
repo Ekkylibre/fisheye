@@ -48,6 +48,11 @@ h2 {
     order: 2;
 }
 
+.contact_button:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
@@ -106,10 +111,6 @@ form input {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.mediaElement {
-  
 }
 
 .media {

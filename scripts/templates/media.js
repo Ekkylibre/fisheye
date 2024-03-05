@@ -17,7 +17,6 @@ async function displayData(media) {
 
     media.forEach((mediaItem) => {
         const mediaElement = document.createElement('div');
-        mediaElement.classList.add("mediaElement")
 
         // Affichage de l'image
         if (mediaItem.image) {
