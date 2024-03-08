@@ -6,9 +6,6 @@ async function getMedia(photographerId) {
     const media = data.media.filter(
         (media) => media.photographerId == photographerId
     );
-
-    console.log(media);
-
     return media;
 }
 

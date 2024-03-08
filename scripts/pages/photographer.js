@@ -11,7 +11,6 @@ async function getPhotographer(id) {
     const photographer = data.photographers.find(
         (photographer) => photographer.id == id
     );
-    console.log(photographer);
     return photographer;
 }
 
@@ -21,7 +20,6 @@ async function displayDataPhotographer(photographer) {
     
     // Utilise un template pour créer la représentation DOM du photographe
     const photographerModel = photographerTemplate(photographer);
-    const { name, picture, city, country, tagline, price } = photographerModel;
     
     const photographerDom = photographerModel.getUserCardDOM();
     
@@ -30,6 +28,9 @@ async function displayDataPhotographer(photographer) {
     const h2 = photographerDom.querySelector('h2');
     const locationWrapper = photographerDom.querySelector('.location');
     const Tagline = photographerDom.querySelector('.tagline');
+
+    const formName = document.querySelector(".photographer-name");
+    formName.innerText = photographerModel.name;
     
     // Créer une nouvelle div pour englober h2, location et tagline
     const detailsWrapper = document.createElement('div');
