@@ -255,6 +255,7 @@ figcaption {
 
 .fa-heart{
     color: #901C1C;
+    cursor: pointer;
 }
 
 aside{

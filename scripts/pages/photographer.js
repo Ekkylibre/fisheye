@@ -32,6 +32,9 @@ async function displayDataPhotographer(photographer) {
     const formName = document.querySelector(".photographer-name");
     formName.innerText = photographerModel.name;
     
+    const photographerPriceElement = document.querySelector('.photographer-price');
+    photographerPriceElement.textContent = photographerModel.price + " € / jour";
+    
     // Créer une nouvelle div pour englober h2, location et tagline
     const detailsWrapper = document.createElement('div');
     detailsWrapper.classList.add('details-wrapper');

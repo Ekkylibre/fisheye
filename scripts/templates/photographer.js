@@ -19,9 +19,6 @@ export function photographerTemplate(data) {
         h2.innerText = `${name}`;
         h2.setAttribute("aria-label", name);
 
-        // const formName = document.querySelector(".photographer-name");
-        // formName.innerText = `${name}`;
-
         const locationWrapper = document.createElement('div');
         locationWrapper.classList.add('location');
 

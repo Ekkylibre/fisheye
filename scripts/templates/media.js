@@ -4,7 +4,7 @@ async function getMedia(photographerId) {
     const response = await fetch("data/photographers.json");
     const data = await response.json();
 
-    // Cherche les médias correspondant à l'ID du photographe fourni
+    // Chercher les médias correspondant à l'ID du photographe fourni
     const media = data.media.filter(
         (media) => media.photographerId == photographerId
     );
@@ -13,6 +13,7 @@ async function getMedia(photographerId) {
 
 async function displayData(media) {
     const photographersSection = document.querySelector(".media");
+    let totalLikes = 0; // Initialiser le total des likes
 
     media.forEach((mediaItem) => {
         const mediaElement = document.createElement('div');
@@ -39,7 +40,6 @@ async function displayData(media) {
             videoElement.appendChild(sourceElement);
             mediaElement.appendChild(videoElement);
         }
-        
 
         const mediaDescript = document.createElement('div');
         mediaDescript.classList.add("media-description");
@@ -50,28 +50,66 @@ async function displayData(media) {
         mediaDescript.appendChild(titleElement);
 
         // Création de la div parent pour les likes
-        const likesContainer = document.createElement('div');
-        likesContainer.classList.add("likesContainer")
+    const likesContainer = document.createElement('div');
+    likesContainer.classList.add("likesContainer");
 
-        // Affichage des likes
-        const likesElement = document.createElement('p');
+    // Affichage des likes
+    const likesElement = document.createElement('p');
+    likesElement.textContent = `${mediaItem.likes}`;
+    likesContainer.appendChild(likesElement);
+
+    // Affichage de l'icône
+    const likeIcon = document.createElement('div');
+    likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
+    likeIcon.classList.add("likeIcon");
+    likesContainer.appendChild(likeIcon);
+
+    mediaDescript.appendChild(likesContainer);
+
+    mediaElement.appendChild(mediaDescript);
+
+    photographersSection.appendChild(mediaElement);
+
+    // Ajouter les likes de chaque média au total
+    totalLikes += mediaItem.likes;
+
+    // Gestionnaire d'événements clic pour le bouton de like
+    likeIcon.addEventListener('click', () => {
+        const alreadyLiked = likeIcon.classList.contains('liked');
+
+        if (alreadyLiked) {
+            mediaItem.likes--;
+            likeIcon.classList.remove('liked');
+        } else {
+            mediaItem.likes++;
+            likeIcon.classList.add('liked');
+        }
+
         likesElement.textContent = `${mediaItem.likes}`;
-        likesContainer.appendChild(likesElement);
 
-        // Affiche icon
-        const likeIcon = document.createElement('div');
-        likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
-        likeIcon.classList.add("likeIcon")
-        
-        likesContainer.appendChild(likeIcon);
-
-        mediaDescript.appendChild(likesContainer);
-
-        mediaElement.appendChild(mediaDescript);
-
-        photographersSection.appendChild(mediaElement);
+        updateTotalLikes(media);
     });
+});
+
+    // Afficher le total des likes dans la balise HTML avec la classe "photographer_likes_count"
+    const likesCountElement = document.querySelector('.photographer_likes_count');
+    likesCountElement.textContent = `${totalLikes}`;
+
+
+    function updateTotalLikes(media) {
+        let totalLikes = 0;
+    
+        // Calculer le nouveau total des likes
+        media.forEach(mediaItem => {
+            totalLikes += mediaItem.likes;
+        });
+    
+        // Afficher le nouveau total des likes
+        const likesCountElement = document.querySelector('.photographer_likes_count');
+        likesCountElement.textContent = `${totalLikes}`;
+    }
 }
+
 
 async function init() {
     // Récupérer l'ID du photographe à partir de l'URL
