@@ -1,3 +1,5 @@
+import { openLightbox } from '/scripts/utils/lightbox.js';
+
 async function getMedia(photographerId) {
     const response = await fetch("data/photographers.json");
     const data = await response.json();
@@ -20,7 +22,9 @@ async function displayData(media) {
             const imageElement = document.createElement('img');
             imageElement.src = `assets/medias/${mediaItem.image}`;
             imageElement.alt = mediaItem.title;
-            imageElement.classList.add("photos")
+            imageElement.classList.add("photos");
+            // Ajout d'un gestionnaire d'événements clic pour ouvrir la lightbox
+            imageElement.addEventListener('click', () => openLightbox(`assets/medias/${mediaItem.image}`, mediaItem.title));
             mediaElement.appendChild(imageElement);
         }
 

@@ -1,16 +1,7 @@
-
-// Définissez votre fonction displayModal
-function displayModal(name) {
+function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
     document.getElementById("prenom").focus();
-
-    // // Utilisez la fonction photographerTemplate pour obtenir les détails du photographe
-    // const { name: photographerName } = photographerTemplate({ name });
-
-    // // Modifiez le contenu en utilisant le nom récupéré
-    // const formName = document.querySelector(".photographer-name");
-    // formName.innerText = `${photographerName}`;
 }
 
 function closeModal() {

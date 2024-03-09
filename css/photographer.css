@@ -144,6 +144,11 @@ form input {
     height: 300px;
     border-radius: 5px;
     object-fit: cover;
+    cursor: pointer;
+}
+
+.videos {
+    cursor: pointer;
 }
 
 .media-description {
@@ -189,4 +194,80 @@ p {
 
 .form-content {
     margin-bottom: 0;
+}
+
+/* Lightbox */
+
+.lightbox_wrapper {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+}
+
+.lightbox {
+    background-color: white;
+}
+
+.lightbox-img {
+    width: 950px;
+    height: 800px;
+    object-fit: cover;
+}
+
+.lightbox-content {
+    display: flex;
+    align-items: center;
+}
+
+.fa-x {
+    color: #901C1C;
+    font-size: 30px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.fa-chevron-left {
+    color: #901C1C;
+    font-size: 60px;
+    margin-left: 32px;
+    cursor: pointer;
+}
+
+.fa-chevron-right {
+    color: #901C1C;
+    font-size: 60px;
+    margin-right: 32px;
+    cursor: pointer;
+}
+
+figcaption {
+    color: #901C1C;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Likes */
+
+.fa-heart{
+    color: #901C1C;
+}
+
+aside{
+    position: sticky;
+    bottom: 0;
+    left: 80%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: fit-content;
+    padding: 20px;
+    border-radius: 5px 5px 0 0;
+    font-weight: bold;
+    font-size: 24px;
+    background-color: #DB8876;
 }
