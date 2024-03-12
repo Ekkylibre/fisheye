@@ -1,4 +1,5 @@
 import { openLightbox } from '/scripts/utils/lightbox.js';
+import { updateLikes, updateTotalLikes } from '../utils/likes.js'; // Importer les fonctions de gestion des likes depuis le nouveau fichier
 
 export async function getMedia(photographerId) {
     const response = await fetch("data/photographers.json");
@@ -50,64 +51,36 @@ export async function displayData(media) {
         mediaDescript.appendChild(titleElement);
 
         // Création de la div parent pour les likes
-    const likesContainer = document.createElement('div');
-    likesContainer.classList.add("likesContainer");
+        const likesContainer = document.createElement('div');
+        likesContainer.classList.add("likesContainer");
 
-    // Affichage des likes
-    const likesElement = document.createElement('p');
-    likesElement.textContent = `${mediaItem.likes}`;
-    likesContainer.appendChild(likesElement);
-
-    // Affichage de l'icône
-    const likeIcon = document.createElement('div');
-    likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
-    likeIcon.classList.add("likeIcon");
-    likesContainer.appendChild(likeIcon);
-
-    mediaDescript.appendChild(likesContainer);
-
-    mediaElement.appendChild(mediaDescript);
-
-    photographersSection.appendChild(mediaElement);
-
-    // Ajouter les likes de chaque média au total
-    totalLikes += mediaItem.likes;
-
-    // Gestionnaire d'événements clic pour le bouton de like
-    likeIcon.addEventListener('click', () => {
-        const alreadyLiked = likeIcon.classList.contains('liked');
-
-        if (alreadyLiked) {
-            mediaItem.likes--;
-            likeIcon.classList.remove('liked');
-        } else {
-            mediaItem.likes++;
-            likeIcon.classList.add('liked');
-        }
-
+        // Affichage des likes
+        const likesElement = document.createElement('p');
         likesElement.textContent = `${mediaItem.likes}`;
+        likesContainer.appendChild(likesElement);
 
-        updateTotalLikes(media);
-    });
-});
+        // Affichage de l'icône
+        const likeIcon = document.createElement('div');
+        likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
+        likeIcon.classList.add("likeIcon");
+        likesContainer.appendChild(likeIcon);
 
-    // Afficher le total des likes dans la balise HTML avec la classe "photographer_likes_count"
-    const likesCountElement = document.querySelector('.photographer_likes_count');
-    likesCountElement.textContent = `${totalLikes}`;
+        mediaDescript.appendChild(likesContainer);
 
+        mediaElement.appendChild(mediaDescript);
 
-    function updateTotalLikes(media) {
-        let totalLikes = 0;
-    
-        // Calculer le nouveau total des likes
-        media.forEach(mediaItem => {
-            totalLikes += mediaItem.likes;
+        photographersSection.appendChild(mediaElement);
+
+        // Ajouter les likes de chaque média au total
+        totalLikes += mediaItem.likes;
+
+        // Gestionnaire d'événements clic pour le bouton de like
+        likeIcon.addEventListener('click', () => {
+            updateLikes(mediaItem, likeIcon, likesElement, media);
         });
-    
-        // Afficher le nouveau total des likes
-        const likesCountElement = document.querySelector('.photographer_likes_count');
-        likesCountElement.textContent = `${totalLikes}`;
-    }
+    });
+
+    updateTotalLikes(media);
 }
 
 async function init() {
