@@ -136,7 +136,6 @@ form input {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px 95px;
-    /* place-items: center; */
 }
 
 .photos {
@@ -253,12 +252,12 @@ figcaption {
 
 /* Likes */
 
-.fa-heart{
+.fa-heart {
     color: #901C1C;
     cursor: pointer;
 }
 
-aside{
+aside {
     position: sticky;
     bottom: 0;
     left: 80%;
@@ -271,4 +270,30 @@ aside{
     font-weight: bold;
     font-size: 24px;
     background-color: #DB8876;
+}
+
+/* Sort */
+
+.btn-filter {
+    display: flex;
+    align-items: baseline;
+}
+
+label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #901C1C;
+    border: none;
+    padding: 20px;
+}
+
+option {
+    background-color: #901C1C;
 }

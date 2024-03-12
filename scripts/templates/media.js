@@ -1,6 +1,6 @@
 import { openLightbox } from '/scripts/utils/lightbox.js';
 
-async function getMedia(photographerId) {
+export async function getMedia(photographerId) {
     const response = await fetch("data/photographers.json");
     const data = await response.json();
 
@@ -11,7 +11,7 @@ async function getMedia(photographerId) {
     return media;
 }
 
-async function displayData(media) {
+export async function displayData(media) {
     const photographersSection = document.querySelector(".media");
     let totalLikes = 0; // Initialiser le total des likes
 
@@ -109,7 +109,6 @@ async function displayData(media) {
         likesCountElement.textContent = `${totalLikes}`;
     }
 }
-
 
 async function init() {
     // Récupérer l'ID du photographe à partir de l'URL
