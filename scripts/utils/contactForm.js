@@ -43,6 +43,4 @@ function afficherValeurs() {
             (currentIndex - 1 + focusableElements.length) %
             focusableElements.length;
     }
-
-    focusableElements[currentIndex].focus();
 });

@@ -69,10 +69,10 @@ h2 {
     justify-content: space-between;
     padding: 35px;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    left: 25%;
     transform: translate(-50%, -50%);
     overflow: auto;
+    animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 
@@ -208,6 +208,7 @@ p {
 
 .lightbox {
     background-color: white;
+    animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .lightbox-img {
@@ -216,9 +217,21 @@ p {
     object-fit: cover;
 }
 
-.lightbox-content {
+.lightbox-video {
+    width: 950px;
+    height: 800px;
+    object-fit: cover;
+}
+
+.lightbox_content {
     display: flex;
     align-items: center;
+}
+
+.lightbox-media {
+    width: 950px;
+    height: 800px;
+    object-fit: cover;
 }
 
 .fa-x {
@@ -277,17 +290,20 @@ aside {
 .btn-filter {
     display: flex;
     align-items: baseline;
+    padding-top: 10px;
+    padding-bottom: 50px;
 }
 
 label {
     font-weight: bold;
-    margin-right: 10px;
+    margin-right: 25px;
 }
 
 select {
     color: white;
     padding: 8px;
     font-size: 16px;
+    font-weight: bold;
     border-radius: 5px;
     background-color: #901C1C;
     border: none;
@@ -297,3 +313,16 @@ select {
 option {
     background-color: #901C1C;
 }
+
+/* Keyframes */
+
+@keyframes scale-in-center {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

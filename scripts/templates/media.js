@@ -33,13 +33,16 @@ export async function displayData(media) {
         // Affichage de la vidéo
         if (mediaItem.video) {
             const videoElement = document.createElement('video');
-            videoElement.controls = true; // Ajout des contrôles de lecture
+            // videoElement.controls = true; // Ajout des contrôles de lecture
             videoElement.classList.add('videos'); // Ajout de la classe pour le style CSS
             const sourceElement = document.createElement('source');
             sourceElement.src = `assets/medias/${mediaItem.video}`;
             sourceElement.type = 'video/mp4'; // Spécification du type de fichier vidéo
             videoElement.appendChild(sourceElement);
             mediaElement.appendChild(videoElement);
+
+            // Ajout d'un gestionnaire d'événements clic pour ouvrir la lightbox
+            videoElement.addEventListener('click', () => openLightbox(`assets/medias/${mediaItem.video}`, mediaItem.title));
         }
 
         const mediaDescript = document.createElement('div');
