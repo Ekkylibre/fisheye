@@ -103,3 +103,12 @@ function navigateMedia(direction) {
 }
 
 document.querySelector('.fa-x').addEventListener('click', closeLightbox);
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (key === 'ArrowLeft') { // Flèche gauche
+        navigateMedia('prev');
+    } else if (key === 'ArrowRight') { // Flèche droite
+        navigateMedia('next');
+    }
+});

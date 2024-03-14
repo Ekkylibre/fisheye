@@ -39,6 +39,7 @@ export async function displayData(media) {
             sourceElement.src = `assets/medias/${mediaItem.video}`;
             sourceElement.type = 'video/mp4'; // Spécification du type de fichier vidéo
             videoElement.appendChild(sourceElement);
+            videoElement.setAttribute('aria-label', mediaItem.title); // Utilisation du titre de la vidéo comme aria-label
             mediaElement.appendChild(videoElement);
 
             // Ajout d'un gestionnaire d'événements clic pour ouvrir la lightbox
