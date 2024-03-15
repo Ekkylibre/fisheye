@@ -13,12 +13,14 @@ export function openLightbox(mediaUrl, title) {
         mediaElement.src = mediaUrl;
         mediaElement.controls = true;
         mediaElement.classList.add("lightbox-video");
+        mediaElement.setAttribute('aria-label', title);
     } else {
         mediaElement = document.createElement('img');
         mediaElement.src = mediaUrl;
         mediaElement.classList.add("lightbox-img");
+        mediaElement.alt = title;
     }
-
+    
     lightboxTitle.textContent = title;
 
     // Nettoyer le contenu précédent de la lightbox
@@ -65,7 +67,6 @@ function navigateMedia(direction) {
 
     // Récupérer l'URL et le titre du média suivant ou précédent
     const nextMedia = mediaArray[currentIndex];
-    console.log(nextMedia)
     let nextTitle = '';
     let mediaElement;
 

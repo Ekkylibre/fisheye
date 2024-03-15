@@ -67,6 +67,7 @@ export async function displayData(media) {
         const likeIcon = document.createElement('div');
         likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
         likeIcon.classList.add("likeIcon");
+        likeIcon.setAttribute("aria-label", "heart");
         likesContainer.appendChild(likeIcon);
 
         mediaDescript.appendChild(likesContainer);

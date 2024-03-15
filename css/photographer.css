@@ -55,10 +55,7 @@ h2 {
     margin-top: 26px;
 }
 
-/* .contact_button:hover {
-    background-color: #DB8876;
-    color: black;
-} */
+/* Modal */
 
 .modal {
     border-radius: 5px;
@@ -126,11 +123,7 @@ form input {
 
 }
 
-.details-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+/* Media */
 
 .media {
     display: grid;
@@ -285,7 +278,7 @@ aside {
     background-color: #DB8876;
 }
 
-/* Sort */
+/* Filter */
 
 .btn-filter {
     display: flex;
