@@ -113,3 +113,10 @@ document.addEventListener('keydown', (event) => {
         navigateMedia('next');
     }
 });
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (key === 'Escape') { // Touche Echap
+        closeLightbox();
+    }
+});

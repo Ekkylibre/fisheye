@@ -9,6 +9,7 @@ export function photographerTemplate(data) {
         const link = document.createElement('a');
         link.href = "./photographer.html?id=" + id;
         link.setAttribute("aria-label", name);
+        link.setAttribute("role", "link");
 
         const img = document.createElement('img');  
         img.setAttribute("src", picture);   
