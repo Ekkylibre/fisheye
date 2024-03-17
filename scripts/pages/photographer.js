@@ -17,6 +17,8 @@ async function getPhotographer(id) {
 //Fonction asynchrone pour afficher les informations du photographe dans le header
 async function displayDataPhotographer(photographer) {
     const photographHeader = document.querySelector(".photograph-header");
+    const photographText = document.querySelector(".photograph-text");
+    const photographImg = document.querySelector(".photographer-img");
     
     // Utilise un template pour créer la représentation DOM du photographe
     const photographerModel = photographerTemplate(photographer);
@@ -25,28 +27,22 @@ async function displayDataPhotographer(photographer) {
     
     const img = photographerDom.querySelector('img');
     img.classList.add("photographer-img")
+
     const h2 = photographerDom.querySelector('h2');
     const locationWrapper = photographerDom.querySelector('.location');
     const Tagline = photographerDom.querySelector('.tagline');
-
     const formName = document.querySelector(".photographer-name");
     formName.innerText = photographerModel.name;
-    
     const photographerPriceElement = document.querySelector('.photographer-price');
     photographerPriceElement.textContent = photographerModel.price + " € / jour";
     
-    // Créer une nouvelle div pour englober h2, location et tagline
-    const detailsWrapper = document.createElement('div');
-    detailsWrapper.classList.add('details-wrapper');
-    
     // Ajouter les éléments sélectionnés à la nouvelle div
-    detailsWrapper.appendChild(h2);
-    detailsWrapper.appendChild(locationWrapper);
-    detailsWrapper.appendChild(Tagline);
+    photographText.appendChild(h2);
+    photographText.appendChild(locationWrapper);
+    photographText.appendChild(Tagline);
     
     // Ajouter les éléments sélectionnés au DOM
-    photographHeader.appendChild(img); // Ajoute l'image directement à photographHeader
-    photographHeader.appendChild(detailsWrapper);
+    photographImg.appendChild(img); // Ajoute l'image directement à photographHeader
 }
 
 async function init() {

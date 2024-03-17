@@ -18,6 +18,7 @@ export async function displayData(media) {
 
     media.forEach((mediaItem) => {
         const mediaElement = document.createElement('div');
+        mediaElement.setAttribute('aria-label', `View ${mediaItem.title} in the lightbox`);
 
         // Affichage de l'image
         if (mediaItem.image) {
@@ -33,18 +34,18 @@ export async function displayData(media) {
         // Affichage de la vidéo
         if (mediaItem.video) {
             const videoElement = document.createElement('video');
-            // videoElement.controls = true; // Ajout des contrôles de lecture
             videoElement.classList.add('videos'); // Ajout de la classe pour le style CSS
+            videoElement.setAttribute('aria-label', `View ${mediaItem.title} in the lightbox`);
             const sourceElement = document.createElement('source');
             sourceElement.src = `assets/medias/${mediaItem.video}`;
             sourceElement.type = 'video/mp4'; // Spécification du type de fichier vidéo
             videoElement.appendChild(sourceElement);
-            videoElement.setAttribute('aria-label', mediaItem.title); // Utilisation du titre de la vidéo comme aria-label
             mediaElement.appendChild(videoElement);
-
+        
             // Ajout d'un gestionnaire d'événements clic pour ouvrir la lightbox
             videoElement.addEventListener('click', () => openLightbox(`assets/medias/${mediaItem.video}`, mediaItem.title));
         }
+        
 
         const mediaDescript = document.createElement('div');
         mediaDescript.classList.add("media-description");
@@ -64,10 +65,10 @@ export async function displayData(media) {
         likesContainer.appendChild(likesElement);
 
         // Affichage de l'icône
-        const likeIcon = document.createElement('div');
+        const likeIcon = document.createElement('button');
         likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
         likeIcon.classList.add("likeIcon");
-        likeIcon.setAttribute("aria-label", "heart");
+        likeIcon.setAttribute("aria-label", "like icon");
         likesContainer.appendChild(likeIcon);
 
         mediaDescript.appendChild(likesContainer);

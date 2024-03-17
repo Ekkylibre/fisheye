@@ -42,8 +42,7 @@ export function photographerTemplate(data) {
         Price.innerText = `${price}€/jour`;
         Price.classList.add('price')
         Price.setAttribute("aria-label", price)
-
-
+        
         link.appendChild(img);
         link.appendChild(h2);
         locationWrapper.appendChild(City);

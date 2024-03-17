@@ -17,12 +17,14 @@
 
 <body>
   <header>
-    <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="fisheye logo" /></a>
+    <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="fisheye logo" aria-label="return to home page"/></a>
   </header>
   <main id="main">
-    <div class="photograph-header">
-      <button class="contact_button" aria-label="open modal" onclick="displayModal()">Contactez-moi</button>
-    </div>
+    <div  class="photograph-header">
+      <div class="photograph-text"></div>
+        <button class="contact_button" type="button" aria-label="open contact form" onclick="displayModal()">Contactez-moi</button>
+      <div class="photographer-img"></div>
+      </div>
 
     <div class="btn-filter">
       <label for="tri">Trier par</label>
@@ -51,17 +53,17 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" aria-label="close contact form" onclick="closeModal()" />
+        <button id="btn-close" type="button" aria-label="close contact form"><img src="assets/icons/close.svg" onclick="closeModal()"/></button>
       </header>
       <p class="photographer-name"></p>
       <form id="myForm">
         <div class="form-content">
           <label for="prenom">Prénom</label>
-          <input type="text" id="prenom" name="prenom" aria-label="enter your name" required>
+          <input type="text" id="prenom" name="firstname" aria-label="enter your name" required>
         </div>
         <div class="form-content">
           <label for="nom">Nom</label>
-          <input type="text" id="nom" name="nom" aria-label="enter your surname" required>
+          <input type="text" id="nom" name="lastname" aria-label="enter your lastname" required>
         </div class="form-content">
         <div class="form-content">
           <label for="email">Email</label>
