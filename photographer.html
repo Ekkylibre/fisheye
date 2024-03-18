@@ -1,37 +1,101 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
-  </head>
-  <body>
-    <header>
-      <img src="assets/images/logo.png" class="logo" />
-    </header>
-    <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+<html lang="fr">
+
+<head>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+  <title>Fisheye - photographe </title>
+
+  <!-- Icon Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    integrity="sha384-...." crossorigin="anonymous">
+
+</head>
+
+<body>
+  <header>
+    <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="fisheye logo" aria-label="return to home page"/></a>
+  </header>
+  <main id="main">
+    <div  class="photograph-header">
+      <div class="photograph-text"></div>
+        <button class="contact_button" type="button" aria-label="open contact form" onclick="displayModal()">Contactez-moi</button>
+      <div class="photographer-img"></div>
       </div>
-    </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
-  </body>
+
+    <div class="btn-filter">
+      <label for="tri">Trier par</label>
+      <select id="tri" name="tri" aria-label="Sort by">
+        <option value="popularite">Popularité</option>
+        <option value="date">Date</option>
+        <option value="titre">Titre</option>
+      </select>
+    </div>
+    
+    <div class="media"></div>
+  </main>
+
+  <!-- Likes -->
+
+  <aside>
+    <p class="photographer_Likes">
+      <div class="photographer_likes_count"></div>
+      <i class="fa fa-heart" aria-label= "heart icon"></i>
+    </p>
+    <div class="photographer-price"></div>
+  </aside>
+
+  <!-- Modal Form -->
+  <div id="contact_modal">
+    <div class="modal">
+      <header>
+        <h2>Contactez-moi</h2>
+        <button id="btn-close" type="button" aria-label="close contact form" onclick="closeModal()"><img src="assets/icons/close.svg" alt="close icon"/></button>
+      </header>
+      <p class="photographer-name"></p>
+      <form id="myForm">
+        <div class="form-content">
+          <label for="prenom">Prénom</label>
+          <input type="text" id="prenom" name="firstname" aria-label="enter your name" required>
+        </div>
+        <div class="form-content">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="lastname" aria-label="enter your lastname" required>
+        </div class="form-content">
+        <div class="form-content">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" aria-label="enter your email" required>
+        </div>
+        <div class="form-content">
+          <label for="message">Votre message</label>
+          <textarea id="message" name="message" aria-label="enter your message" required></textarea>
+        </div>
+        <button type="button" class="contact_button" onclick="afficherValeurs()"
+          aria-label="send contact form">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox_wrapper" aria-modal="true" role="dialog">
+    <div class="lightbox">
+      <button id="btn-close-lightbox" type="button" aria-label="close lightbox"><i class="fa-solid fa-x"></i></button>
+      <div class="lightbox_content">
+        <button type="button" aria-label="previous media"><i class="fa-solid fa-chevron-left"></i></button>
+        <figure class="lightbox_media" role="media" aria-label="Current Media"></figure>
+        <button type="button" aria-label="next media"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/scripts/pages/photographer.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+  <script type="module" src="/scripts/templates/media.js"></script>
+  <script type="module" src="/scripts/utils/filter.js"></script>
+
+</body>
+
 </html>
