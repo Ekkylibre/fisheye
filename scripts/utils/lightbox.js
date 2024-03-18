@@ -2,6 +2,10 @@ export function openLightbox(mediaUrl, title) {
     const lightboxWrapper = document.querySelector('.lightbox_wrapper');
     lightboxWrapper.style.display = "block";
 
+    // Ajout de cette ligne pour définir le focus sur le bouton de fermeture
+    const closeButton = lightboxWrapper.querySelector('#btn-close-lightbox');
+    closeButton.focus();
+
     const lightboxMedia = lightboxWrapper.querySelector('.lightbox_media');
     const lightboxTitle = document.createElement('figcaption');
     const lightboxContent = document.createElement('div');
@@ -19,6 +23,7 @@ export function openLightbox(mediaUrl, title) {
         mediaElement.src = mediaUrl;
         mediaElement.classList.add("lightbox-img");
         mediaElement.alt = title;
+        mediaElement.setAttribute('aria-label', title);
     }
     
     lightboxTitle.textContent = title;
@@ -30,11 +35,14 @@ export function openLightbox(mediaUrl, title) {
     lightboxMedia.appendChild(lightboxTitle);
 
     // Ajouter les écouteurs d'événements pour la navigation entre médias
-    const prevButton = lightboxWrapper.querySelector('.fa-chevron-left');
-    const nextButton = lightboxWrapper.querySelector('.fa-chevron-right');
+    const prevButton = lightboxWrapper.querySelector('[aria-label="previous media"]');
+    const nextButton = lightboxWrapper.querySelector('[aria-label="next media"]');
 
-    prevButton.addEventListener('click', navigateMedia.bind(null, 'prev'));
-    nextButton.addEventListener('click', navigateMedia.bind(null, 'next'));
+    prevButton.addEventListener('click', () => navigateMedia('prev'));
+    nextButton.addEventListener('click', () => navigateMedia('next'));
+    
+    // Ajouter le gestionnaire d'événements pour fermer la lightbox
+    closeButton.addEventListener('click', closeLightbox);
 }
 
 export function closeLightbox() {
@@ -45,7 +53,6 @@ export function closeLightbox() {
 function navigateMedia(direction) {
     const lightboxMedia = document.querySelector('.lightbox_media');
     const currentMedia = lightboxMedia.querySelector('img, video');
-    const currentTitle = lightboxMedia.querySelector('figcaption');
     const mediaElements = document.querySelectorAll('.photos, .videos'); // Sélectionne toutes les images et vidéos
     const mediaArray = Array.from(mediaElements); // Convertit NodeList en tableau
 
@@ -103,7 +110,13 @@ function navigateMedia(direction) {
     lightboxMedia.appendChild(newTitle); // Ajouter le nouveau titre à la lightbox
 }
 
-document.querySelector('.fa-x').addEventListener('click', closeLightbox);
+// Gestionnaire d'événements pour la touche "Echap"
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (key === 'Escape') { // Touche Echap
+        closeLightbox();
+    }
+});
 
 document.addEventListener('keydown', (event) => {
     const key = event.key;
@@ -111,12 +124,5 @@ document.addEventListener('keydown', (event) => {
         navigateMedia('prev');
     } else if (key === 'ArrowRight') { // Flèche droite
         navigateMedia('next');
-    }
-});
-
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    if (key === 'Escape') { // Touche Echap
-        closeLightbox();
     }
 });
