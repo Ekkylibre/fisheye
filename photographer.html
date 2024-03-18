@@ -53,7 +53,7 @@
     <div class="modal">
       <header>
         <h2>Contactez-moi</h2>
-        <button id="btn-close" type="button" aria-label="close contact form"><img src="assets/icons/close.svg" onclick="closeModal()"/></button>
+        <button id="btn-close" type="button" aria-label="close contact form" onclick="closeModal()"><img src="assets/icons/close.svg" alt="close icon"/></button>
       </header>
       <p class="photographer-name"></p>
       <form id="myForm">
@@ -81,8 +81,8 @@
 
   <!-- Lightbox -->
   <div class="lightbox_wrapper" aria-modal="true" role="dialog">
-    <div class="lightbox" aria-label="Media closeup view">
-      <i class="fa-solid fa-x" aria-label="close dialog"></i>
+    <div class="lightbox">
+      <button type="button" aria-label="close dialog"><i class="fa-solid fa-x"></i></button>
       <div class="lightbox_content">
         <i class="fa-solid fa-chevron-left" aria-label="previous media"></i>
         <figure class="lightbox_media" role="media" aria-label="Current Media"></figure>

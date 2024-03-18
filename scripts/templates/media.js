@@ -17,22 +17,28 @@ export async function displayData(media) {
     let totalLikes = 0; // Initialiser le total des likes
 
     media.forEach((mediaItem) => {
-        const mediaElement = document.createElement('div');
+        // Création de la balise <a> pour chaque média
+        const mediaElement = document.createElement('a');
+        mediaElement.setAttribute('href','#');
         mediaElement.setAttribute('aria-label', `View ${mediaItem.title} in the lightbox`);
 
-        // Affichage de l'image
+        // Ajouter la classe pour le style CSS
+        mediaElement.classList.add('media-link');
+
+        // Ajouter un gestionnaire d'événements clic pour ouvrir la lightbox
+        mediaElement.addEventListener('click', (event) => {
+            event.preventDefault(); // Empêcher le comportement par défaut du lien
+            openLightbox(`assets/medias/${mediaItem.image || mediaItem.video}`, mediaItem.title);
+        });
+
+        // Affichage de l'image ou de la vidéo dans le lien
         if (mediaItem.image) {
             const imageElement = document.createElement('img');
             imageElement.src = `assets/medias/${mediaItem.image}`;
             imageElement.alt = mediaItem.title;
             imageElement.classList.add("photos");
-            // Ajout d'un gestionnaire d'événements clic pour ouvrir la lightbox
-            imageElement.addEventListener('click', () => openLightbox(`assets/medias/${mediaItem.image}`, mediaItem.title));
             mediaElement.appendChild(imageElement);
-        }
-
-        // Affichage de la vidéo
-        if (mediaItem.video) {
+        } else if (mediaItem.video) {
             const videoElement = document.createElement('video');
             videoElement.classList.add('videos'); // Ajout de la classe pour le style CSS
             videoElement.setAttribute('aria-label', `View ${mediaItem.title} in the lightbox`);
@@ -41,12 +47,9 @@ export async function displayData(media) {
             sourceElement.type = 'video/mp4'; // Spécification du type de fichier vidéo
             videoElement.appendChild(sourceElement);
             mediaElement.appendChild(videoElement);
-        
-            // Ajout d'un gestionnaire d'événements clic pour ouvrir la lightbox
-            videoElement.addEventListener('click', () => openLightbox(`assets/medias/${mediaItem.video}`, mediaItem.title));
         }
-        
 
+        // Création de la balise <figcaption> pour chaque média
         const mediaDescript = document.createElement('div');
         mediaDescript.classList.add("media-description");
 
@@ -55,7 +58,7 @@ export async function displayData(media) {
         titleElement.textContent = mediaItem.title;
         mediaDescript.appendChild(titleElement);
 
-        // Création de la div parent pour les likes
+        // Création de la div parente pour les likes
         const likesContainer = document.createElement('div');
         likesContainer.classList.add("likesContainer");
 
@@ -68,14 +71,24 @@ export async function displayData(media) {
         const likeIcon = document.createElement('button');
         likeIcon.innerHTML = '<i class="fa fa-heart"></i>'; // Vous devrez ajuster la classe de l'icône en fonction de votre bibliothèque d'icônes
         likeIcon.classList.add("likeIcon");
-        likeIcon.setAttribute("aria-label", "like icon");
+        likeIcon.setAttribute("aria-label", "like");
+        likeIcon.setAttribute("type","button");
         likesContainer.appendChild(likeIcon);
 
         mediaDescript.appendChild(likesContainer);
 
-        mediaElement.appendChild(mediaDescript);
+        // Création de la div parente pour chaque média
+        const mediaContainer = document.createElement('div');
+        mediaContainer.classList.add("media-container");
 
-        photographersSection.appendChild(mediaElement);
+        // Ajout de la balise <a> à la div parente
+        mediaContainer.appendChild(mediaElement);
+
+        // Ajout de la balise <figcaption> à la div parente
+        mediaContainer.appendChild(mediaDescript);
+
+        // Ajout de la div parente à la section des photographes
+        photographersSection.appendChild(mediaContainer);
 
         // Ajouter les likes de chaque média au total
         totalLikes += mediaItem.likes;
