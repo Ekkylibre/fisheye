@@ -1,8 +1,9 @@
+// Function to open the lightbox with given media and title
 export function openLightbox(mediaUrl, title) {
     const lightboxWrapper = document.querySelector('.lightbox_wrapper');
     lightboxWrapper.style.display = "block";
 
-    // Ajout de cette ligne pour définir le focus sur le bouton de fermeture
+    // Adding this line to set focus on the close button
     const closeButton = lightboxWrapper.querySelector('#btn-close-lightbox');
     closeButton.focus();
 
@@ -28,101 +29,103 @@ export function openLightbox(mediaUrl, title) {
     
     lightboxTitle.textContent = title;
 
-    // Nettoyer le contenu précédent de la lightbox
+    // Clearing previous content of the lightbox
     lightboxMedia.innerHTML = '';
     lightboxContent.appendChild(mediaElement);
     lightboxMedia.appendChild(lightboxContent);
     lightboxMedia.appendChild(lightboxTitle);
 
-    // Ajouter les écouteurs d'événements pour la navigation entre médias
+    // Adding event listeners for navigating between media
     const prevButton = lightboxWrapper.querySelector('[aria-label="previous media"]');
     const nextButton = lightboxWrapper.querySelector('[aria-label="next media"]');
 
     prevButton.addEventListener('click', () => navigateMedia('prev'));
     nextButton.addEventListener('click', () => navigateMedia('next'));
     
-    // Ajouter le gestionnaire d'événements pour fermer la lightbox
+    // Adding event handler for closing the lightbox
     closeButton.addEventListener('click', closeLightbox);
 }
 
+// Function to close the lightbox
 export function closeLightbox() {
     const lightboxWrapper = document.querySelector('.lightbox_wrapper');
     lightboxWrapper.style.display = "none";
 }
 
+// Function to navigate between media in the lightbox
 function navigateMedia(direction) {
     const lightboxMedia = document.querySelector('.lightbox_media');
     const currentMedia = lightboxMedia.querySelector('img, video');
-    const mediaElements = document.querySelectorAll('.photos, .videos'); // Sélectionne toutes les images et vidéos
-    const mediaArray = Array.from(mediaElements); // Convertit NodeList en tableau
+    const mediaElements = document.querySelectorAll('.photos, .videos');
+    const mediaArray = Array.from(mediaElements);
 
     let currentIndex = mediaArray.findIndex((element) => {
         if (element.tagName === 'IMG') {
             return element.src === currentMedia.src;
         } else if (element.tagName === 'VIDEO') {
-            return element.src === currentMedia.src || element.currentSrc === currentMedia.src; // Vérifiez également la source actuelle pour les vidéos
+            return element.src === currentMedia.src || element.currentSrc === currentMedia.src;
         }
-        return false; // Retourne false pour les éléments non pris en charge
+        return false;
     });
 
-    // Déterminer l'index du média suivant ou précédent en fonction de la direction
+    // Determine the index of the next or previous media based on direction
     if (direction === 'prev') {
         currentIndex = (currentIndex === 0) ? mediaArray.length - 1 : currentIndex - 1;
     } else if (direction === 'next') {
         currentIndex = (currentIndex === mediaArray.length - 1) ? 0 : currentIndex + 1;
     }
 
-    // Récupérer l'URL et le titre du média suivant ou précédent
+    // Get the URL and title of the next or previous media
     const nextMedia = mediaArray[currentIndex];
     let nextTitle = '';
     let mediaElement;
 
-    // Créer la balise appropriée pour le média suivant
+    // Create appropriate tag for the next media
     if (nextMedia.tagName === 'IMG') {
         mediaElement = document.createElement('img');
         mediaElement.classList.add('lightbox-media')
         mediaElement.src = nextMedia.src;
-        nextTitle = nextMedia.alt; // Utilisez alt pour les images
+        nextTitle = nextMedia.alt;
     } else if (nextMedia.tagName === 'VIDEO') {
         mediaElement = document.createElement('video');
         mediaElement.classList.add('lightbox-media')
         mediaElement.controls = true;
-        mediaElement.src = nextMedia.src || nextMedia.currentSrc; // Utilisez la source actuelle si disponible
-        
-        // Récupérer le nom du fichier de la source de la vidéo
+        mediaElement.src = nextMedia.src || nextMedia.currentSrc;
+    
         const videoSrc = nextMedia.src || nextMedia.currentSrc;
-        const videoFilename = videoSrc.split('/').pop(); // Récupérer le nom du fichier
+        const videoFilename = videoSrc.split('/').pop()
 
-        // Enlever l'extension du fichier (assumant que l'extension est .mp4)
-        const videoTitle = videoFilename.slice(0, -4); // Enlever les 4 derniers caractères (l'extension .mp4)
+        // Remove file extension (assuming extension is .mp4)
+        const videoTitle = videoFilename.slice(0, -4);
 
-        // Remplacer les underscores (_) par des espaces dans le titre
+        // Replace underscores (_) with spaces in the title
         nextTitle = videoTitle.replace(/_/g, ' ');
     }
 
-    // Créer un nouvel élément figcaption pour afficher le titre du média suivant
+    // Create a new figcaption element to display the title of the next media
     const newTitle = document.createElement('figcaption');
     newTitle.textContent = nextTitle;
 
-    // Mettre à jour le média et le titre dans la lightbox
-    lightboxMedia.innerHTML = ''; // Supprimer le contenu précédent
+    // Update the media and title in the lightbox
+    lightboxMedia.innerHTML = '';
     lightboxMedia.appendChild(mediaElement);
-    lightboxMedia.appendChild(newTitle); // Ajouter le nouveau titre à la lightbox
+    lightboxMedia.appendChild(newTitle);
 }
 
-// Gestionnaire d'événements pour la touche "Echap"
+// Event handler for the "Escape" key
 document.addEventListener('keydown', (event) => {
     const key = event.key;
-    if (key === 'Escape') { // Touche Echap
+    if (key === 'Escape') { // Escape key
         closeLightbox();
     }
 });
 
+// Event handler for left/right arrow keys for navigation
 document.addEventListener('keydown', (event) => {
     const key = event.key;
-    if (key === 'ArrowLeft') { // Flèche gauche
+    if (key === 'ArrowLeft') { // Left arrow
         navigateMedia('prev');
-    } else if (key === 'ArrowRight') { // Flèche droite
+    } else if (key === 'ArrowRight') { // Right arrow
         navigateMedia('next');
     }
 });

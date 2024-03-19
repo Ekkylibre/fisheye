@@ -3,24 +3,22 @@ import { photographerTemplate } from "../templates/photographer.js";
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get("id");
 
+// Asynchronous function to fetch photographer data from JSON file
 async function getPhotographer(id) {
     const response = await fetch("data/photographers.json");
-    //La variable data contiendra les données JSON extraites de la réponse.
     const data = await response.json();
-    // Cherche le photographe correspondant à l'ID fourni
     const photographer = data.photographers.find(
         (photographer) => photographer.id == id
     );
     return photographer;
 }
 
-//Fonction asynchrone pour afficher les informations du photographe dans le header
+// Asynchronous function to display photographer information in the header
 async function displayDataPhotographer(photographer) {
     const photographHeader = document.querySelector(".photograph-header");
     const photographText = document.querySelector(".photograph-text");
     const photographImg = document.querySelector(".photographer-img");
-    
-    // Utilise un template pour créer la représentation DOM du photographe
+
     const photographerModel = photographerTemplate(photographer);
     
     const photographerDom = photographerModel.getUserCardDOM();
@@ -30,23 +28,20 @@ async function displayDataPhotographer(photographer) {
 
     const h2 = photographerDom.querySelector('h2');
     const locationWrapper = photographerDom.querySelector('.location');
-    const Tagline = photographerDom.querySelector('.tagline');
+    const tagline = photographerDom.querySelector('.tagline');
     const formName = document.querySelector(".photographer-name");
     formName.innerText = photographerModel.name;
     const photographerPriceElement = document.querySelector('.photographer-price');
-    photographerPriceElement.textContent = photographerModel.price + " € / jour";
+    photographerPriceElement.textContent = photographerModel.price + " € / day";
     
-    // Ajouter les éléments sélectionnés à la nouvelle div
     photographText.appendChild(h2);
     photographText.appendChild(locationWrapper);
-    photographText.appendChild(Tagline);
+    photographText.appendChild(tagline);
     
-    // Ajouter les éléments sélectionnés au DOM
-    photographImg.appendChild(img); // Ajoute l'image directement à photographHeader
+    photographImg.appendChild(img);
 }
 
 async function init() {
-    // Récupère les datas du photographe
     const photographer = await getPhotographer(id);
     displayDataPhotographer(photographer);
 }
