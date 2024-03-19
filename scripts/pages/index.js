@@ -1,15 +1,17 @@
 import { photographerTemplate } from "../templates/photographer.js";
 
+// Asynchronous function to retrieve photographer data from JSON file
 async function getPhotographers() {
     try {
         const response = await fetch('../../data/photographers.json');
         const data = await response.json();
         return data;
     } catch (error) {
-        console.error('Une erreur s\'est produite lors de la récupération des données :', error);
+        console.error('An error occurred while fetching data:', error);
     }
 }
 
+// Asynchronous function to display photographer data in the user interface
 async function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
 
@@ -21,7 +23,6 @@ async function displayData(photographers) {
 }
 
 async function init() {
-    // Récupère les datas des photographes
     const { photographers } = await getPhotographers();
     displayData(photographers);
 }

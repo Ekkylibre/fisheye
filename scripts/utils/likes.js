@@ -1,3 +1,4 @@
+// Function to update the likes of an individual media item
 export function updateLikes(mediaItem, likeIcon, likesElement, media) {
     const alreadyLiked = likeIcon.classList.contains('liked');
 
@@ -14,15 +15,14 @@ export function updateLikes(mediaItem, likeIcon, likesElement, media) {
     updateTotalLikes(media);
 }
 
+// Function to update the total number of likes
 export function updateTotalLikes(media) {
     let totalLikes = 0;
 
-    // Calculer le nouveau total des likes
     media.forEach(mediaItem => {
         totalLikes += mediaItem.likes;
     });
 
-    // Afficher le nouveau total des likes
     const likesCountElement = document.querySelector('.photographer_likes_count');
     likesCountElement.textContent = `${totalLikes}`;
 }
