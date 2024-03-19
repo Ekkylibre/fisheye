@@ -12,7 +12,7 @@ function closeModal() {
 }
 
 // Function to display input values
-function displayValues() {
+function displayValeurs() {
     const firstName = document.getElementById("prenom").value;
     const lastName = document.getElementById("nom").value;
     const email = document.getElementById("email").value;
