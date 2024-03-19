@@ -32,7 +32,7 @@ async function displayDataPhotographer(photographer) {
     const formName = document.querySelector(".photographer-name");
     formName.innerText = photographerModel.name;
     const photographerPriceElement = document.querySelector('.photographer-price');
-    photographerPriceElement.textContent = photographerModel.price + " € / day";
+    photographerPriceElement.textContent = photographerModel.price + " € / jour";
     
     photographText.appendChild(h2);
     photographText.appendChild(locationWrapper);
