@@ -85,19 +85,33 @@ function navigateMedia(direction) {
         mediaElement = document.createElement('img');
         mediaElement.classList.add('lightbox-media')
         mediaElement.src = nextMedia.src;
+        mediaElement.alt = nextMedia.alt; // Transfer alt attribute
+    
+        // Check if aria-label attribute exists and is not null before transferring
+        const ariaLabel = nextMedia.getAttribute('aria-label');
+        if (ariaLabel !== null) {
+            mediaElement.setAttribute('aria-label', ariaLabel); // Transfer aria-label attribute
+        }
+        
         nextTitle = nextMedia.alt;
     } else if (nextMedia.tagName === 'VIDEO') {
         mediaElement = document.createElement('video');
         mediaElement.classList.add('lightbox-media')
         mediaElement.controls = true;
-        mediaElement.src = nextMedia.src || nextMedia.currentSrc;
+        mediaElement.src = nextMedia.src || nextMedia.currentSrc;   
+    
+        // Check if aria-label attribute exists and is not null before transferring
+        const ariaLabel = nextMedia.getAttribute('aria-label');
+        if (ariaLabel !== null) {
+            mediaElement.setAttribute('aria-label', ariaLabel); // Transfer aria-label attribute
+        }
     
         const videoSrc = nextMedia.src || nextMedia.currentSrc;
         const videoFilename = videoSrc.split('/').pop()
-
+    
         // Remove file extension (assuming extension is .mp4)
         const videoTitle = videoFilename.slice(0, -4);
-
+    
         // Replace underscores (_) with spaces in the title
         nextTitle = videoTitle.replace(/_/g, ' ');
     }
