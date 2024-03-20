@@ -15,7 +15,6 @@ async function getPhotographer(id) {
 
 // Asynchronous function to display photographer information in the header
 async function displayDataPhotographer(photographer) {
-    const photographHeader = document.querySelector(".photograph-header");
     const photographText = document.querySelector(".photograph-text");
     const photographImg = document.querySelector(".photographer-img");
 

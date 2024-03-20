@@ -14,7 +14,6 @@ export function photographerTemplate(data) {
         const img = document.createElement('img');  
         img.setAttribute("src", picture);   
         img.setAttribute("alt", name);
-        img.setAttribute("aria-label", portrait);
 
         const h2 = document.createElement('h2');
         h2.innerText = `${name}`;
