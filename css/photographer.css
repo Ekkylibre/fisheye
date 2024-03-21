@@ -214,6 +214,7 @@ button {
 .lightbox {
     background-color: white;
     animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    overflow: scroll;
 }
 
 .lightbox-img {
@@ -234,7 +235,7 @@ button {
 }
 
 .lightbox-media {
-    width: 950px;
+    width: 750px;
     height: 800px;
     object-fit: cover;
 }

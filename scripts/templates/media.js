@@ -67,7 +67,7 @@ export async function displayData(media) {
 
         // Displaying like icon
         const likeIcon = document.createElement('button');
-        likeIcon.innerHTML = '<i class="fa fa-heart"></i>';
+        likeIcon.innerHTML = '<em class="fa fa-heart"></em>';
         likeIcon.classList.add("likeIcon");
         likeIcon.setAttribute("aria-label", "like");
         likeIcon.setAttribute("type","button");
@@ -83,7 +83,7 @@ export async function displayData(media) {
         mediaContainer.appendChild(mediaDescript);
         photographersSection.appendChild(mediaContainer);
 
-        totalLikes += mediaItem.likes;
+        totalLikes += mediaItem.likes;/* */
 
         // Click event handler for like button
         likeIcon.addEventListener('click', () => {
