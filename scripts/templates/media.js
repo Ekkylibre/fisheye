@@ -14,7 +14,6 @@ export async function getMedia(photographerId) {
 // Function to display media data on the webpage
 export async function displayData(media) {
     const photographersSection = document.querySelector(".media");
-    let totalLikes = 0;
 
     media.forEach((mediaItem) => {
         // Creating <a> tag for each media
@@ -28,7 +27,7 @@ export async function displayData(media) {
             event.preventDefault();
             openLightbox(`assets/medias/${mediaItem.image || mediaItem.video}`, mediaItem.title);
         });
-
+        
         // Displaying image or video within the link
         if (mediaItem.image) {
             const imageElement = document.createElement('img');
@@ -82,8 +81,6 @@ export async function displayData(media) {
         mediaContainer.appendChild(mediaElement);
         mediaContainer.appendChild(mediaDescript);
         photographersSection.appendChild(mediaContainer);
-
-        totalLikes += mediaItem.likes;/* */
 
         // Click event handler for like button
         likeIcon.addEventListener('click', () => {
