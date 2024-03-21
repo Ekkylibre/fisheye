@@ -1,0 +1,23 @@
+{
+  "name": "fisheye",
+  "version": "1.0.0",
+  "description": "Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --max-warnings=0 scripts/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ekkylibre/fisheye.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ekkylibre/fisheye/issues"
+  },
+  "homepage": "https://github.com/Ekkylibre/fisheye#readme",
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  }
+}

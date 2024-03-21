@@ -68,8 +68,9 @@ h2 {
     position: fixed;
     left: 25%;
     transform: translate(-50%, -50%);
-    overflow: auto;
     animation: scale-in-center 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    overflow-y: scroll;
+    max-height: 90vh;
 }
 
 
@@ -208,7 +209,6 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: auto;
 }
 
 .lightbox {
@@ -231,10 +231,12 @@ button {
 .lightbox_content {
     display: flex;
     align-items: center;
+    overflow-y: scroll;
+    max-height: 90vh;
 }
 
 .lightbox-media {
-    width: 950px;
+    width: 750px;
     height: 800px;
     object-fit: cover;
 }

@@ -1,4 +1,5 @@
 // Function to display the modal
+// eslint-disable-next-line
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
@@ -6,12 +7,14 @@ function displayModal() {
 }
 
 // Function to close the modal
+// eslint-disable-next-line
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
 
 // Function to display input values
+// eslint-disable-next-line
 function displayValeurs() {
     const firstName = document.getElementById("prenom").value;
     const lastName = document.getElementById("nom").value;
@@ -37,8 +40,10 @@ document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowDown" || event.key === "ArrowRight") {
         event.preventDefault();
         currentIndex = (currentIndex + 1) % focusableElements.length;
+        focusableElements[currentIndex].focus(); // Utilisation de currentIndex ici
     } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
         event.preventDefault();
         currentIndex = (currentIndex - 1 + focusableElements.length) % focusableElements.length;
+        focusableElements[currentIndex].focus(); // Utilisation de currentIndex ici
     }
 });
